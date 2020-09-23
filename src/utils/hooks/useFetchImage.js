@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from "axios";
 
-const baseUrl = process.env.REACT_APP_UNSPLASH_API_BASE_RL;
+const baseUrl = process.env.REACT_APP_UNSPLASH_API_BASE_URL;
 const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 
 export default function useFetchImage(page, searchKeyword) {

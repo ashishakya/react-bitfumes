@@ -75,7 +75,7 @@ const Images = () => {
     const inputRef = useRef(null)
 
     useEffect(() => {
-        inputRef.current.focus()
+        // inputRef.current.focus()
 
         console.log("image component mount")
         const interval = (setInterval(() => {
@@ -134,25 +134,25 @@ const Images = () => {
             <div className="gap-0" style={{columnCount: 3}}>
                 <ShowImages/>
             </div>
-            {
-                errors.length > 0 ? null : (
-                    <div>
-                        {/*<button onClick={handleLoadMore}>Load More</button>*/}
-                        <div className="flex justify-center">
-                            <input id="input-box" ref={inputRef} type="text" className="p-2 border border-gray-800 shadow rounded" value={imageUrl} onChange={handleChange}/>
-                            <button
-                                disabled={imageUrl === ""}
-                                className={`p-2  text-white ${imageUrl !== "" ? "bg-green-600" : "bg-green-300"}`}
-                                onClick={handleAdd}>
-                                Add New
-                            </button>
-                        </div>
-                        <span>https://images.unsplash.com/photo-1599687350916-a8be7f9b68f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80</span>
+            {/*{*/}
+            {/*    errors.length > 0 ? null : (*/}
+            {/*        <div>*/}
+            {/*            /!*<button onClick={handleLoadMore}>Load More</button>*!/*/}
+            {/*            <div className="flex justify-center">*/}
+            {/*                <input id="input-box" ref={inputRef} type="text" className="p-2 border border-gray-800 shadow rounded" value={imageUrl} onChange={handleChange}/>*/}
+            {/*                <button*/}
+            {/*                    disabled={imageUrl === ""}*/}
+            {/*                    className={`p-2  text-white ${imageUrl !== "" ? "bg-green-600" : "bg-green-300"}`}*/}
+            {/*                    onClick={handleAdd}>*/}
+            {/*                    Add New*/}
+            {/*                </button>*/}
+            {/*            </div>*/}
+            {/*            /!*<span>https://images.unsplash.com/photo-1599687350916-a8be7f9b68f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80</span>*!/*/}
 
-                    </div>
-                )
+            {/*        </div>*/}
+            {/*    )*/}
 
-            }
+            {/*}*/}
 
         </section>
     )
