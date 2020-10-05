@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./assets/css/style.css"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import routes from "./utils/routes";
 import Header from "./components/Header";
+import firebase from "./config/firebase";
+import AppContext from "./store/AppContext";
 
 /*
 class App extends React.Component {
@@ -55,29 +57,47 @@ class App extends React.Component {
 */
 
 const App = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                setIsLoggedIn(true)
+                setUser(user)
+                console.log('logged in>>',user)
+            }else{
+                setUser({})
+                setIsLoggedIn(false)
+            }
+        })
+    }, [])
+
     return (
         <Router>
-            <Header/>
-            <Switch>
-                {
-                    routes.map((route, index) => (
-                        <Route path={route.path}
-                               exact={route.exact}
-                               key={index}
-                               component={route.component}
-                        />
-                    ))
-                }
-                {/*<Route path="/" exact={true}>*/}
-                {/*    <Home/>*/}
-                {/*</Route>*/}
-                {/*<Route path="/gallery">*/}
-                {/*    <Gallery/>*/}
-                {/*</Route>*/}
-                {/*<Route path="/login">*/}
-                {/*    <Login/>*/}
-                {/*</Route>*/}
-            </Switch>
+            <AppContext.Provider value={[isLoggedIn, user]}>
+                <Header/>
+                <Switch>
+                    {
+                        routes.map((route, index) => (
+                            <Route path={route.path}
+                                   exact={route.exact}
+                                   key={index}
+                                   component={route.component}
+                            />
+                        ))
+                    }
+                    {/*<Route path="/" exact={true}>*/}
+                    {/*    <Home/>*/}
+                    {/*</Route>*/}
+                    {/*<Route path="/gallery">*/}
+                    {/*    <Gallery/>*/}
+                    {/*</Route>*/}
+                    {/*<Route path="/login">*/}
+                    {/*    <Login/>*/}
+                    {/*</Route>*/}
+                </Switch>
+            </AppContext.Provider>
         </Router>
     )
 }
