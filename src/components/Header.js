@@ -9,13 +9,14 @@ export default function Header() {
                     <li className="mr-5">
                         <Link to="/">Home</Link>
                      </li>
-                    <li className="mr-5">
-                        <Link to="/login">Login</Link>
-                    </li>
+                    <li>
+                         <Link to="/gallery">Gallery</Link>
+                     </li>
                 </span>
-                <li>
-                    <Link to="/gallery">Gallery</Link>
+                <li className="mr-5">
+                    <Link to="/login">Login</Link>
                 </li>
+
             </ul>
             {/*<a href="/">Home</a>*/}
             {/*<a href="/login">Login</a>*/}

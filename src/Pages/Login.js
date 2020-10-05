@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import firebase from "../config/firebase";
-import { useHistory } from 'react-router-dom'
+import Redirect, {useHistory} from 'react-router-dom'
 
 
 export default function Login() {
@@ -19,7 +19,7 @@ export default function Login() {
             .then(res => {
                 setIsLoading(false)
                 setError("Login Success");
-                history.push('/gallery')
+                history.push('/')
 
             })
             .catch(function (error) {
@@ -34,7 +34,7 @@ export default function Login() {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value)
     }
-    return (
+        return (
         <div className="flex h-screen bg-gray-200">
             <div className="m-auto text-3xl bg-indigo-900 text-black">
                 <form className="m-5 w-10/12" onSubmit={handleSubmit}>
@@ -54,5 +54,5 @@ export default function Login() {
                 </form>
             </div>
         </div>
-    )
-}
+        )
+        }
