@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import firebase from "../config/firebase";
 import Redirect, {useHistory} from 'react-router-dom'
 import {useFormik} from "formik";
+import * as Yup from 'yup';
 
 
 export default function SignUp() {
@@ -10,20 +11,24 @@ export default function SignUp() {
         onSubmit: value => {
             console.log('formik>>', value);
         },
-        validate: values => {
-            const errors = {};
-            if (!values.email) {
-                errors.email = "Email field is required."
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = "Invalid email address."
-            }
-            if (!values.password) {
-                errors.password = "Password field is required."
-            } else if (values.password.length <= 6) {
-                errors.password = "Password must be long than 6 letters."
-            }
-            return errors
-        }
+        // validate: values => {
+        //     const errors = {};
+        //     if (!values.email) {
+        //         errors.email = "Email field is required."
+        //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        //         errors.email = "Invalid email address."
+        //     }
+        //     if (!values.password) {
+        //         errors.password = "Password field is required."
+        //     } else if (values.password.length <= 6) {
+        //         errors.password = "Password must be long than 6 letters."
+        //     }
+        //     return errors
+        // }
+        validationSchema: Yup.object({
+            email:Yup.string().required("Email is required.").email("Invalid email."),
+            password:Yup.string().required("Password is required.").min(6)
+        })
     });
 
     return (
