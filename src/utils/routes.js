@@ -15,7 +15,7 @@ export default [
         component: ()=><Gallery/>
     },
     {
-        path:'/',
+        path:'/login',
         exact:false,
         component: ()=><Login/>
     }

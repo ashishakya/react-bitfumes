@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./assets/css/style.css"
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import  {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import routes from "./utils/routes";
 import Header from "./components/Header";
 import firebase from "./config/firebase";
@@ -65,8 +65,7 @@ const App = () => {
             if (user) {
                 setIsLoggedIn(true)
                 setUser(user)
-                console.log('logged in>>',user)
-            }else{
+            } else {
                 setUser({})
                 setIsLoggedIn(false)
             }
@@ -79,13 +78,19 @@ const App = () => {
                 <Header/>
                 <Switch>
                     {
-                        routes.map((route, index) => (
-                            <Route path={route.path}
-                                   exact={route.exact}
-                                   key={index}
-                                   component={route.component}
-                            />
-                        ))
+                        routes.map((route, index) => {
+                            if(route.path==='/login'){
+                                if(isLoggedIn) return <Redirect to="/"/>;
+                            }else{
+                                return (
+                                    <Route path={route.path}
+                                           exact={route.exact}
+                                           key={index}
+                                           component={route.component}
+                                    />
+                                )
+                            }
+                        })
                     }
                     {/*<Route path="/" exact={true}>*/}
                     {/*    <Home/>*/}
