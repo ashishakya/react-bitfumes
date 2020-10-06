@@ -7,6 +7,7 @@ import firebase from "./config/firebase";
 import AppContext from "./store/AppContext";
 import AuthRoute from "./utils/routes/AuthRoute";
 import GuestRoute from "./utils/routes/GuestRoute";
+import NotFound from "./Pages/404";
 
 /*
 class App extends React.Component {
@@ -59,7 +60,7 @@ class App extends React.Component {
 */
 
 const App = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false );
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -108,6 +109,12 @@ const App = () => {
                             )
                         })
                     }
+
+                    <Route path="*">
+                            <NotFound />
+                    </Route>
+
+                    )
                     {/*<Route path="/" exact={true}>*/}
                     {/*    <Home/>*/}
                     {/*</Route>*/}
