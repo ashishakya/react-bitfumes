@@ -10,7 +10,7 @@ export default function Header() {
 
     const handleLogOut = () =>{
         firebase.auth().signOut().then(function() {
-            history.replace('/login')
+            history.replace("/login")
             // setIsLoggedIn(false)
         }).catch(function(error) {
             console.log(error.response.data)

@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import "./assets/css/style.css"
-import  {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import routes from "./utils/routes";
 import Header from "./components/Header";
 import firebase from "./config/firebase";
 import AppContext from "./store/AppContext";
+import AuthRoute from "./utils/routes/AuthRoute";
+import GuestRoute from "./utils/routes/GuestRoute";
 
 /*
 class App extends React.Component {
@@ -79,17 +81,31 @@ const App = () => {
                 <Switch>
                     {
                         routes.map((route, index) => {
-                            if(route.path==='/login'){
-                                if(isLoggedIn) return <Redirect to="/"/>;
-                            }else{
-                                return (
-                                    <Route path={route.path}
-                                           exact={route.exact}
-                                           key={index}
-                                           component={route.component}
-                                    />
-                                )
+                            if (route.protected === 'guest') {
+                                return <GuestRoute
+                                    path={route.path}
+                                    exact={route.exact}
+                                    key={index}
+                                    component={route.component}
+                                />
                             }
+
+                            if (route.protected === 'auth') {
+                                return <AuthRoute
+                                    path={route.path}
+                                    exact={route.exact}
+                                    key={index}
+                                    component={route.component}
+                                />
+                            }
+
+                            return (
+                                <Route path={route.path}
+                                       exact={route.exact}
+                                       key={index}
+                                       component={route.component}
+                                />
+                            )
                         })
                     }
                     {/*<Route path="/" exact={true}>*/}
