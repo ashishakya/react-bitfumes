@@ -1,6 +1,4 @@
-import React, {useState} from 'react'
-import firebase from "../config/firebase";
-import Redirect, {useHistory} from 'react-router-dom'
+import React from 'react'
 import {useFormik} from "formik";
 import * as Yup from 'yup';
 
@@ -26,8 +24,8 @@ export default function SignUp() {
         //     return errors
         // }
         validationSchema: Yup.object({
-            email:Yup.string().required("Email is required.").email("Invalid email."),
-            password:Yup.string().required("Password is required.").min(6)
+            email: Yup.string().required("Email is required.").email("Invalid email."),
+            password: Yup.string().required("Password is required.").min(6)
         })
     });
 
@@ -37,25 +35,31 @@ export default function SignUp() {
                 <form className="m-5 w-10/12" onSubmit={formik.handleSubmit}>
                     <h1 className="w-full text-4xl tracking-widest text-center my-6">SignUp</h1>
                     <div className="w-full my-6">
-                        <input type="email"
-                               name="email"
-                               placeholder="Email"
-                               className="p-2 rounded shadow w-full"
-                               onBlur={formik.handleBlur}
-                               onChange={formik.handleChange}
-                               value={formik.values.email}/>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            className="p-2 rounded shadow w-full"
+                            {...formik.getFieldProps('email')}
+                            // name="email"
+                            // onBlur={formik.handleBlur}
+                            // onChange={formik.handleChange}
+                            // value={formik.values.email}
+                        />
                         {
                             formik.touched.email && formik.errors.email ? <p className="text-white"> {formik.errors.email}</p> : ""
                         }
                     </div>
                     <div className="w-full my-6">
-                        <input name="password"
-                               type="password"
-                               placeholder="Password"
-                               className="p-2 rounded shadow w-full"
-                               onBlur={formik.handleBlur}
-                               onChange={formik.handleChange}
-                               value={formik.values.password}/>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            className="p-2 rounded shadow w-full"
+                            {...formik.getFieldProps("password")}
+                            // name="password"
+                            // onBlur={formik.handleBlur}
+                            // onChange={formik.handleChange}
+                            // value={formik.values.password}
+                        />
                         {
                             formik.touched.password && formik.errors.password ? <p className="text-white">{formik.errors.password}</p> : ""
                         }
