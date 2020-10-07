@@ -1,23 +1,41 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import PropTypes from 'prop-types';
-import * as mobilenet from "@tensorflow-models/mobilenet";
+import useTFPrediction from "../utils/hooks/useTFPrediction";
 
 
 function Image({image, handleRemove, index}) {
-
-    function handlePredict(index) {
-    //     const img = imageRef.current;
-    //     mobilenet.load().then(model => {
-    //         // Classify the image.
-    //         model.classify(img).then(predictions => {
-    //             setPredictions(predictions)
-    //         });
-    //     });
-    }
+    const [handlePredict, predictions] = useTFPrediction();
+    const imageRef = useRef();
     return (
         <div className="p-2">
-            <img src={image} width="100%" alt="images" onClick={() => handleRemove(index)}/>
-            <button className="p-2 rounded bg-blue-500 text-white" onClick={handlePredict(index)}>Predict</button>
+            {
+                predictions.length > 0 &&
+                (
+                    <span className="absolute bg-gray-800 text-white rounded-lg shadow px-2 left-0 ml-5">
+                        {
+                            predictions.map((prediction) => (
+                                <div
+                                    className="flex justify-between text-sm"
+                                    key={index}
+                                >
+                                    <p>{prediction.className}</p>
+                                    <p>{Math.floor(prediction.probability * 100)} %</p>
+                                </div>
+                            ))
+                        }
+                    </span>
+                )
+            }
+
+            <img
+                src={image}
+                ref={imageRef}
+                width="100%"
+                alt="images"
+                onClick={() => handleRemove(index)}
+                crossOrigin="anonymous"
+            />
+            <button className="p-2 rounded bg-blue-500 text-white" onClick={() => handlePredict(imageRef.current)}>Predict</button>
         </div>
     )
 }
@@ -39,9 +57,9 @@ Image.propTypes = {
 */
 
 Image.propTypes = {
-    index:PropTypes.number,
-    image:PropTypes.string,
-    handleRemove:PropTypes.func
+    index: PropTypes.number,
+    image: PropTypes.string,
+    handleRemove: PropTypes.func
 }
 
 export default Image
