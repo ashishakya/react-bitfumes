@@ -2,6 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import useScroll from "../utils/hooks/useScroll";
 import useFetchImage from "../utils/hooks/useFetchImage";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Image from "./Image";
 /*
 class Images extends React.Component {
     constructor(props) {
@@ -58,13 +59,16 @@ const Images = () => {
     }
 
     function ShowImages() {
-        return <InfiniteScroll dataLength={images.length} next={()=>setPage(page+1)} hasMore={true}>
+        return <InfiniteScroll dataLength={images.length} next={() => setPage(page + 1)} hasMore={true}>
             {
                 images.map((image, index) => {
                     return (
-                        <div key={index} className="p-2">
-                            <img src={image.urls.regular} width="100%" alt="images" onClick={() => handleRemove(index)}/>
-                        </div>
+                        <Image
+                            key={index}
+                            image={image.urls.regular}
+                            handleRemove={handleRemove}
+                            index={index}
+                        />
                     )
                 })
             }
@@ -119,7 +123,7 @@ const Images = () => {
     //     console.log(scrollPosition, window.innerHeight, document.body.offsetHeight)
     // }, [scrollPosition])
 
-    const handleInput = (event)=>{
+    const handleInput = (event) => {
         setSearchKeyword(event.target.value)
     }
 
