@@ -22,8 +22,11 @@ export default function Header() {
                 <li className="mr-5">
                     <NavLink to="/" exact={true} activeClassName="underline">Home</NavLink>
                 </li>
-                <li>
+                <li className="mr-5">
                     <NavLink to="/gallery" activeClassName="underline">Gallery</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/tensorflow" activeClassName="underline">Tensor Flow</NavLink>
                 </li>
             </ul>
             <ul className="flex justify-between px-10">

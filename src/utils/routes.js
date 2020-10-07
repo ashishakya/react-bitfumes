@@ -3,6 +3,7 @@ import React from 'react'
 import Gallery from "../Pages/Gallery";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
+import TensorFlow from "../Pages/TensorFlow";
 
 export default [
     {
@@ -28,5 +29,11 @@ export default [
         exact:false,
         component: ()=><SignUp/>,
         protected: "guest"
+    },
+    {
+        path:'/tensorflow',
+        exact:false,
+        component: ()=><TensorFlow/>,
+        protected: null
     }
 ]
