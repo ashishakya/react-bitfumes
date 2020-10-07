@@ -1,20 +1,22 @@
 import React, {useRef, useState} from 'react'
 import "@tensorflow/tfjs"
 import * as mobilenet from '@tensorflow-models/mobilenet'
+import useTFPrediction from "../utils/hooks/useTFPrediction";
 
 export default function Tensorflow() {
     const imageRef = useRef();
-    const [predictions, setPredictions] = useState([]);
-
-    const handlePredict = () => {
-        const img = imageRef.current;
-        mobilenet.load().then(model => {
-            // Classify the image.
-            model.classify(img).then(predictions => {
-                setPredictions(predictions)
-            });
-        });
-    }
+    // const [predictions, setPredictions] = useState([]);
+    const [handlePredict, predictions] = useTFPrediction();
+    // const handlePredict = () => {
+    //     predict(imageRef.current)
+    //     // const img = imageRef.current;
+    //     // mobilenet.load().then(model => {
+    //     //     // Classify the image.
+    //     //     model.classify(img).then(predictions => {
+    //     //         setPredictions(predictions)
+    //     //     });
+    //     // });
+    // }
 
     return (
         <div className="flex justify-center">
@@ -39,7 +41,7 @@ export default function Tensorflow() {
                             </div>
                         ))
                     }
-                    <button className="p-2 rounded bg-blue-500 text-white" onClick={handlePredict}>Predict Result</button>
+                    <button className="p-2 rounded bg-blue-500 text-white" onClick={()=>handlePredict(imageRef.current)}>Predict Result</button>
                 </div>
             </div>
         </div>
