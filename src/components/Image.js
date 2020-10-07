@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 
 function Image({image, handleRemove, index}) {
     return (
@@ -7,6 +9,9 @@ function Image({image, handleRemove, index}) {
         </div>
     )
 }
+
+/*
+***** Manually *****
 
 const types = {
     index(props, propName) {
@@ -18,6 +23,13 @@ const types = {
 
 Image.propTypes = {
     index: types.index
+}
+*/
+
+Image.propTypes = {
+    index:PropTypes.number,
+    image:PropTypes.string,
+    handleRemove:PropTypes.func
 }
 
 export default Image
